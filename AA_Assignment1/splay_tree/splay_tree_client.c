@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 100
+#define BENCHMARK_COUNT 2000
 
 
 // function to start a nanosecond-resolution timer
@@ -21,8 +21,47 @@ long timer_end(struct timespec start_time){
 }
 
 
-int main() {
 
+/*
+int main(){
+    void* tree = make_new_dictionary();
+    /*
+    insert(dictionary, 77, 5);
+    insert(dictionary, 35, 6);
+    insert(dictionary,62,7);
+    insert(dictionary,59,6);
+    insert(dictionary,40,5);
+    insert(dictionary,30,5);
+    insert(dictionary,29,5);
+    insert(dictionary,56,5);
+    insert(dictionary,29,5);
+    insert(dictionary,19,5);
+    insert(dictionary,13,5);
+    printf("found %d\n",find(dictionary,56));
+    insert(dictionary,70,5);
+    insert(dictionary,84,5);
+    printf("done\n");
+    
+   /*
+    insert(tree,67 , rand()%BENCHMARK_COUNT);
+	insert(tree,45, rand()%BENCHMARK_COUNT);
+	insert(tree,89, rand()%BENCHMARK_COUNT);
+	insert(tree,56, rand()%BENCHMARK_COUNT);
+	insert(tree,31, rand()%BENCHMARK_COUNT);
+	insert(tree,35, rand()%BENCHMARK_COUNT);
+	insert(tree,28, rand()%BENCHMARK_COUNT);
+	insert(tree,64, rand()%BENCHMARK_COUNT);
+	insert(tree,53, rand()%BENCHMARK_COUNT);
+	insert(tree,91, rand()%BENCHMARK_COUNT);
+	insert(tree,93, rand()%BENCHMARK_COUNT);
+	insert(tree,92, rand()%BENCHMARK_COUNT);    
+    
+}
+*/
+
+
+int main() {
+    long totaltime = 0;
     void* dictionary = make_new_dictionary();
     for(int i=1; i<=BENCHMARK_COUNT; ++i) {
         struct timespec vartime = timer_start();
@@ -30,10 +69,13 @@ int main() {
             insert(dictionary, random()%BENCHMARK_COUNT, random()%BENCHMARK_COUNT);
         }
         else {
-            printf("%d ", find(dictionary, random()%BENCHMARK_COUNT));
-            // find(dictionary, random()%BENCHMARK_COUNT);
+            //printf("found %d\n", find(dictionary, random()%BENCHMARK_COUNT));
+            find(dictionary, random()%BENCHMARK_COUNT);
         }
         long time_elapsed_nanos = timer_end(vartime);
-        printf("%ld\n", time_elapsed_nanos);
+        totaltime+=time_elapsed_nanos;
+        //printf("%d %ld\n",i, time_elapsed_nanos);
     }
+    printf("Total Time %ld\n",totaltime);
 }
+

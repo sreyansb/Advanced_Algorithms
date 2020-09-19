@@ -20,18 +20,18 @@ void* make_new_dynamic_table(int maxie)
 
 void push_back(void** dtable, int element)
 {
-    if ((*(dyntable**)dtable)->cursize>=0.9*(*(dyntable**)dtable)->capacity)
+    if ((*(dyntable**)dtable)->cursize ==0.9 * (*(dyntable**)dtable)->capacity)
     {
         no_of_copies+=(*(dyntable**)dtable)->cursize;
 
         if ((*(dyntable**)dtable)->capacity & 1)//means it is odd so we can get an even
             ((*(dyntable**)dtable)->capacity)++;
 
-        int k = ((*(dyntable**)dtable)->capacity * 3)/2; 
+        int k = ((*(dyntable**)dtable)->capacity * 1.5); 
         (*(dyntable**)dtable) = realloc((*(dyntable**)dtable),sizeof(dyntable)+sizeof(int)*k);
         ((*(dyntable**)dtable)->capacity) = k;
 
-        printf("push copies %d\n",no_of_copies);
+        printf("copies %d\n",no_of_copies);
     }
     (*(dyntable**)dtable)->numbers[(*(dyntable**)dtable)->cursize]=element;
     ++((*(dyntable**)dtable)->cursize);
