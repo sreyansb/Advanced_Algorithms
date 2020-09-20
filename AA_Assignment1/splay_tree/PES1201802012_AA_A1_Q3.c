@@ -15,7 +15,7 @@ typedef struct splay_tree
 {
     node* head;
 }tree;
-/*
+
 void inorder(node* head)
 {
     if (head)
@@ -34,7 +34,6 @@ void preorder(node* head)
             preorder(head->right);
         }
 }
-*/
 
 node* create_node(int key,int value)
 {
@@ -336,7 +335,7 @@ void insert(void* treeptr, int key, int value)
     // inorder(((tree*)treeptr)->head);
     // printf("\ninsert preorder: ");
     // preorder(((tree*)treeptr)->head);
-    // printf("\nno_of_rotations %d\n",no_of_rotations);
+    printf("nor %d\n",no_of_rotations);
     
 }
 
@@ -372,8 +371,107 @@ int find(void* treeptr, int key)
         // printf("\nPREORDER:");
         // preorder(((tree*)treeptr)->head);
         // printf("\n");
-        //printf("nor %d\n",no_of_rotations);
+        printf("nor %d\n",no_of_rotations);
         return ((tree*)treeptr)->head->value;
         
     }
 }
+/*
+int main(){
+    void *dict = make_new_dictionary();
+    insert(dict, 5, 1);
+    insert(dict, 2, 1);
+    insert(dict, 7, 1);
+    insert(dict, 6, 1);
+    insert(dict, 1, 1);
+    insert(dict, 3, 1);
+    insert(dict, 5, 2);
+    insert(dict, 5, 3);
+    insert(dict, 6, 2);
+    insert(dict, 2, 2);
+    insert(dict, 2, 3);
+    insert(dict, 2, 3);
+
+    printf("Before find: \n");
+
+    printf("Data is: %d \n", find(dict, 2));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    printf("Data is: %d \n", find(dict, 1));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    printf("Data is: %d \n", find(dict, 5));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    printf("Data is: %d \n", find(dict, 7));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    printf("Data is: %d \n", find(dict, 2));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    printf("Data is: %d \n", find(dict, 6));
+    printf("Preorder: ");
+    preorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("Inorder: ");
+    inorder(((tree*)dict) -> head);
+    printf("\n");
+    printf("\n");
+    printf("\n");
+
+    // insert(tree,67 , rand()%BENCHMARK_COUNT);
+	// insert(tree,45, rand()%BENCHMARK_COUNT);
+	// insert(tree,89, rand()%BENCHMARK_COUNT);
+	// insert(tree,56, rand()%BENCHMARK_COUNT);
+	// insert(tree,31, rand()%BENCHMARK_COUNT);
+	// insert(tree,35, rand()%BENCHMARK_COUNT);
+	// insert(tree,28, rand()%BENCHMARK_COUNT);
+	// insert(tree,64, rand()%BENCHMARK_COUNT);
+	// insert(tree,53, rand()%BENCHMARK_COUNT);
+	// insert(tree,91, rand()%BENCHMARK_COUNT);
+	// insert(tree,93, rand()%BENCHMARK_COUNT);
+	// insert(tree,92, rand()%BENCHMARK_COUNT);
+    // printf("Preorder: ");
+    // preorder(((tree*)tree) -> head);
+    // printf("\n");
+
+
+    // printInorder(((tree*)tree) -> head);
+    // print_t(((tree*)tree) -> head);
+}
+*/
