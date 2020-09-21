@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 100
+#define BENCHMARK_COUNT 1000
 
-
+extern int no_of_copies;
 // call this function to start a nanosecond-resolution timer
 struct timespec timer_start(){
 	struct timespec start_time;
@@ -38,4 +38,5 @@ int main() {
 		fulltime+=time_elapsed_nanos;
     }
 	printf("Fulltime %ld\n",fulltime);
+	printf("Copies %d\n",no_of_copies);
 }

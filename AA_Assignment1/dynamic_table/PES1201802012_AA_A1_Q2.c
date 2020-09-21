@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 #include "dyntable_impl.h"
 
 int no_of_copies=0;
@@ -20,14 +21,14 @@ void* make_new_dynamic_table(int maxie)
 
 void push_back(void** dtable, int element)
 {
-    if ((*(dyntable**)dtable)->cursize ==0.9 * (*(dyntable**)dtable)->capacity)
+    if ((*(dyntable**)dtable)->cursize ==(*(dyntable**)dtable)->capacity)
     {
         no_of_copies+=(*(dyntable**)dtable)->cursize;
 
-        if ((*(dyntable**)dtable)->capacity & 1)//means it is odd so we can get an even
+        if ((*(dyntable**)dtable)->capacity ==0)//means it is odd so we can get an even
             ((*(dyntable**)dtable)->capacity)++;
 
-        int k = ((*(dyntable**)dtable)->capacity * 1.5); 
+        int k = ceil((*(dyntable**)dtable)->capacity * 1.5); 
         (*(dyntable**)dtable) = realloc((*(dyntable**)dtable),sizeof(dyntable)+sizeof(int)*k);
         ((*(dyntable**)dtable)->capacity) = k;
 
@@ -42,7 +43,7 @@ void pop_back(void** dtable)
 {
     if ((*(dyntable**)dtable)->cursize==0)
     {
-        (*(dyntable**)dtable)->capacity *= 0.375;
+        (*(dyntable**)dtable)->capacity =ceil(((*(dyntable**)dtable)->capacity)*0.25);
         if ((*(dyntable**)dtable)->capacity == 0)
             ++((*(dyntable**)dtable)->capacity);
         (*(dyntable**)dtable) = realloc((*(dyntable**)dtable),sizeof(dyntable)+sizeof(int)*(*(dyntable**)dtable)->capacity);
@@ -53,7 +54,7 @@ void pop_back(void** dtable)
         if ((*(dyntable**)dtable)->cursize <= 0.25*(*(dyntable**)dtable)->capacity)
         {
             no_of_copies+=(*(dyntable**)dtable)->cursize;
-            (*(dyntable**)dtable)->capacity =((*(dyntable**)dtable)->capacity)*0.375;
+            (*(dyntable**)dtable)->capacity =ceil(((*(dyntable**)dtable)->capacity)*0.25);
             if ((*(dyntable**)dtable)->capacity==0)
                 (*(dyntable**)dtable)->capacity++;
             (*(dyntable**)dtable) = realloc((*(dyntable**)dtable),sizeof(dyntable)+sizeof(int)*(*(dyntable**)dtable)->capacity);

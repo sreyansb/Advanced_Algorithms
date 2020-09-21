@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<math.h>
 #include "dyntable_impl.h"
 
 int no_of_copies=0;
@@ -25,11 +26,14 @@ void push_back(void** dtable, int element)
     if ((*(dyntable**)dtable)->cursize==(*(dyntable**)dtable)->capacity)
         {   
             no_of_copies+=(*(dyntable**)dtable)->cursize;
-            if ((*(dyntable**)dtable)->capacity & 1)
-                ((*(dyntable**)dtable)->capacity)+=1;
-            (*(dyntable**)dtable)->numbers = realloc((*(dyntable**)dtable)->numbers,sizeof(int)*(((*(dyntable**)dtable)->capacity*3)/2));
-            (*(dyntable**)dtable)->capacity =((*(dyntable**)dtable)->capacity/2)*3;
-	    printf("copies %d\n",no_of_copies);
+            if ((*(dyntable**)dtable)->capacity == 0)
+                {((*(dyntable**)dtable)->capacity)+=1;(*(dyntable**)dtable)->numbers = realloc((*(dyntable**)dtable)->numbers,sizeof(int));}
+	    else
+	    {
+             (*(dyntable**)dtable)->numbers = realloc((*(dyntable**)dtable)->numbers,sizeof(int)*ceil((((*(dyntable**)dtable)->capacity*3.0)/2)));
+             (*(dyntable**)dtable)->capacity =ceil((((*(dyntable**)dtable)->capacity*3.0)/2));
+	    }
+	    //printf("copies %d\n",no_of_copies);
         }
     (*(dyntable**)dtable)->numbers[(*(dyntable**)dtable)->cursize] = element;
     (*(dyntable**)dtable)->cursize += 1;
@@ -40,7 +44,7 @@ void pop_back(void** dtable)
 {
     if ((*(dyntable**)dtable)->cursize==0)
     {
-        (*(dyntable**)dtable)->capacity =(((*(dyntable**)dtable)->capacity)*3)/8;
+        (*(dyntable**)dtable)->capacity =ceil((((*(dyntable**)dtable)->capacity)*1.0)/4);
         if ((*(dyntable**)dtable)->capacity==0)
             ++((*(dyntable**)dtable)->capacity);
         (*(dyntable**)dtable)->numbers = realloc((*(dyntable**)dtable)->numbers,sizeof(int)*(*(dyntable**)dtable)->capacity);
@@ -52,17 +56,18 @@ void pop_back(void** dtable)
         {
             no_of_copies+=(*(dyntable**)dtable)->cursize; //only cursize number of elements are present in the array=>we need to only copy cursize number of elements
 
-            (*(dyntable**)dtable)->capacity =(((*(dyntable**)dtable)->capacity)*3)/8;
+            (*(dyntable**)dtable)->capacity =ceil((((*(dyntable**)dtable)->capacity)*1.0)/4);
             if ((*(dyntable**)dtable)->capacity==0)
                 ++((*(dyntable**)dtable)->capacity);
             
             (*(dyntable**)dtable)->numbers = realloc((*(dyntable**)dtable)->numbers,sizeof(int)*(*(dyntable**)dtable)->capacity);
-            printf("pop copies %d \n",no_of_copies);
+            //printf("pop copies %d \n",no_of_copies);
             //printf("CAPA %d\n",(*(dyntable**)dtable)->capacity);
         }
     }
     //printf("CAPO %d\n",(*(dyntable**)dtable)->capacity);    
 }
+/*
 void print_table(dyntable* table){
     printf("\n");
     printf("\n");
@@ -77,8 +82,8 @@ void print_table(dyntable* table){
     printf("\n");
     printf("\n");
 }
-
-
+*/
+/*
 int main(){
     void* table = (dyntable*)make_new_dynamic_table(0);
     print_table(((dyntable*)table));
@@ -155,6 +160,6 @@ int main(){
     push_back(&table, 11);
     print_table(((dyntable*)table));
 }
-
+*/
 
 
