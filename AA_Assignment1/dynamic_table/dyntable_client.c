@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#define BENCHMARK_COUNT 1000
+#define BENCHMARK_COUNT 100
 
 extern int no_of_copies;
 // call this function to start a nanosecond-resolution timer
