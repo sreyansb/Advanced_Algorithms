@@ -2,9 +2,10 @@
 #include<stdlib.h>
 #include<math.h>
 
-int mod = 1000000007;//according to cp-algorithms.com, this is a better way to do compared to 10**9+7
-int prime = 29;
+int mod = 1000000007;//according to cp-algorithms.com, 10**9+9 is better
+int prime = 29;//smallest prime number>26
 
+//to construct prime**index for all index>0 and lesser than n
 void createpower(int n,long long int* powerarray)
 {
     powerarray[0]=1;
@@ -21,7 +22,7 @@ void createarray(int len,char* text,int* parray)
     //saw the material from cp-algorithms.com
     //we compute parray for all prefixes of the string text and start from index 0
     //hash of 'a' is 1, 'b' is 2 and so on
-    //we have assumed basetopower- initially as s which is the closest prime number>26.
+    //we have assumed basetopower- initially as prime which is the closest prime number>26.
     long int basetopower=prime;//sometimes might just go above the limits->better to have long rather than just int
     parray[0]=text[0]-'a'+1;
     for(int i=1;i<len;++i)
@@ -45,8 +46,11 @@ int main()
     //calculate the hashmap-table
     int* parray = malloc(sizeof(int)*n);
     createarray(n,text,parray);
+
+    //calculate the powers for each valid index
     long long int* powerarray = malloc(sizeof(long long int)*n);
     createpower(n,powerarray);
+
     //get all queries and respective calculation
     int q;
     scanf("%d",&q);
@@ -57,10 +61,13 @@ int main()
         //important to do this step so as to compute p^index to multiply for all strings in text[0...index-1].
         //otherwise we have to compute multiplicative modulo inverse of p[index] which is cumbersome
         long long int indexpower=powerarray[index];
-        //length of string 1 will be index and length of string 2 will be n(len of string)-index
+
+        //length of string B will be index and length of string C will be n(len of string)-index
         //we will need to search only in the minimum of the lengths
+
         int minl = index<n-index?index:n-index;
         int low=0;int high = minl-1;int mid;int maxl=0;
+
         while(low<=high)
         {
             mid=low+(high-low)/2;
