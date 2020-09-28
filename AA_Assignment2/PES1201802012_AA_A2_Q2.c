@@ -5,6 +5,17 @@
 int mod = 1000000007;//according to cp-algorithms.com, this is a better way to do compared to 10**9+7
 int prime = 29;
 
+void createpower(int n,long long int* powerarray)
+{
+    powerarray[0]=1;
+    long long int x;
+    for(int i=1;i<n;++i)
+    {
+        x = (prime*(powerarray[i-1]))%mod;
+        powerarray[i] = x;
+    }
+}
+
 void createarray(int len,char* text,int* parray)
 {
     //saw the material from cp-algorithms.com
@@ -34,7 +45,8 @@ int main()
     //calculate the hashmap-table
     int* parray = malloc(sizeof(int)*n);
     createarray(n,text,parray);
-
+    long long int* powerarray = malloc(sizeof(long long int)*n);
+    createpower(n,powerarray);
     //get all queries and respective calculation
     int q;
     scanf("%d",&q);
@@ -42,15 +54,9 @@ int main()
     {
         int index;
         scanf("%d",&index);
-        long int indexpower=1;
         //important to do this step so as to compute p^index to multiply for all strings in text[0...index-1].
         //otherwise we have to compute multiplicative modulo inverse of p[index] which is cumbersome
-        int icopy=index;
-        while(icopy)
-        {
-            indexpower=(indexpower%mod*prime)%mod;
-            --icopy;
-        }
+        long long int indexpower=powerarray[index];
         //length of string 1 will be index and length of string 2 will be n(len of string)-index
         //we will need to search only in the minimum of the lengths
         int minl = index<n-index?index:n-index;
