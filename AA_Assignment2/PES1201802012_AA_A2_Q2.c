@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
 
 int mod = 1000000007;//according to cp-algorithms.com, 10**9+9 is better
 int prime = 29;//smallest prime number>26

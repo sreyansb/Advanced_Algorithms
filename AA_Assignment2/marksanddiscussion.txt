@@ -1,0 +1,2 @@
+QUestion 1 had a problem from my side, I should have returned the index 'i' instead of max number of matchings
+Returned current_non_matching_index-number_of_matchings

@@ -15,7 +15,7 @@ void createlps(char* pattern,int lenp,int* lpst)
         else
             {
                 if (lpst[i]==0)
-                    lpst[j++]=0;
+                    {lpst[j++]=0;}
                 else
                     i=lpst[i-1];//it is like the find data structure in data science
             }
@@ -42,7 +42,7 @@ int main()
    dq[2*n]='\0';
    //printf("%s\n",dq);
    //Now P is the pattern and Q is the text in which we will search for.
-   int maxi=0;
+   int maxi=0;int R=0;int lR=0;
    int *prefixtable=malloc(sizeof(int)*(n));
    createlps(P,n,prefixtable);
    /*
@@ -64,6 +64,8 @@ int main()
        else
        {
            maxi=maxi>curcount?maxi:curcount;
+		if (maxi==curcount)
+			R=i-curcount;
            if (j!=0)
            {
                j=prefixtable[j-1];
@@ -73,7 +75,9 @@ int main()
        i++;
    }
    maxi=maxi>curcount?maxi:curcount;
-   printf("%d\n",maxi);
+   if (maxi==curcount)
+	R=i-curcount;
+   printf("%d\n",R);
    free(P);
    free(Q);
    free(dq);
