@@ -36,7 +36,6 @@ int main()
                 dpt[n][k][3]=((((dpt[n-1][k][3]+dpt[n-1][k][2])%mod)*25)%mod+(((dpt[n-1][k][0]+dpt[n-1][k][1])%mod)*24)%mod)%mod;
             }
         }
-    //printf("%lld %lld %lld %lld %lld %lld %lld \n",dpt[4][0][0],dpt[4][0][1],dpt[4][0][2],dpt[4][0][3],dpt[4][1][0],dpt[4][1][1],dpt[3][0][2]);
         
     int t;
     scanf("%d",&t);
@@ -44,7 +43,7 @@ int main()
     {
         int n;int k;
         scanf("%d %d",&n,&k);
-        if (3*k+1>n)
+        if (3*k+1>n || k<0)
             printf("0\n");
         else
             printf("%lld\n",(dpt[n][k][0]+dpt[n][k][1]+dpt[n][k][2]+dpt[n][k][3])%mod);

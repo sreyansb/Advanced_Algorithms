@@ -21,18 +21,30 @@ int maxfind(int a,int b)
 
 int main()
 {
-    int t;
-    scanf("%d",&t);
+    int t;char s;
+    scanf("%d",&t);//to avoid the buffer
     while(t--)
     {
-        char* sm=(char*)malloc(1005);
-        char* sn=(char*)malloc(1005);
-        scanf("%s %s",sm,sn);
-
+        char* mainst=malloc(2010);
+        char* sm=malloc(1005);
+        char* sn=malloc(1005);
+        int len=0;
+        // while((s=getc(stdin))!='\n')//due to the buffer
+        //     {printf("%c\n",s);mainst[len++]=s;}
+        scanf("%c",&s);
+        scanf("%[^\n]",mainst);
+        int front=0;
+        while(mainst[front]!=' ')
+            {sm[front]=mainst[front];++front;}
+        sm[front++]='\0';
+        sn=mainst+front;
+        
+        //scanf("%s %s",sm,sn);
         int m=strlen(sm);
         int n=strlen(sn);
         convert(sm,m);
         convert(sn,n);
+        //printf("lens %d %d\n",m,n);
         
         //has m+1 rows and n+1 columns, therefore to access lpstable[x][y] = lpstable[(x)*(n+1)+y]
         int* lpstable=(int*)malloc((m+1)*(n+1)*sizeof(int));
@@ -54,7 +66,7 @@ int main()
         printf("%d\n",(m+n-2*lpstable[m*(n+1)+n]+mod)%mod);
 	    free(lpstable);
         free(sm);
-        free(sn);
+
     }
 }
 /*
