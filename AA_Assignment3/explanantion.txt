@@ -1,0 +1,28 @@
+QUESTION1:
+
+This was amongst the best questions asked ever.
+
+We had to find the number of words of length 'n' with 'k' number of occurences of the word 'abba'.
+Couldn't figure out at the first attempt.
+Then they gave a clue, which helped.
+
+dp[n][k][x] - represents the number of words of length 'n' with number of occurences of 'abba'=k.
+There might be overlaps.So have to take care of that
+
+So it is a 3D Dp problem along with combinatorics.
+dp[n][k][0] represents the words ending with 'a'
+dp[n][k][1] represents the words ending with 'ab'
+dp[n][k][2] represents the words ending with 'abb'
+dp[n][k][3] represents the words ending with other stuff of length 1,2,...,n
+
+FORMULA: for derivation check AA notes
+
+dp[n][k][0]=(dpt[n-1][k-1][2]+(dpt[n-1][k][0]+dpt[n-1][k][1]+dpt[n-1][k][3])) for all k>0
+	   =(dpt[n-1][k][0]+dpt[n-1][k][1]+dpt[n-1][k][3]) if k==0
+dpt[n][k][1]=dpt[n-1][k][0]
+dpt[n][k][2]=dpt[n-1][k][1]
+dpt[n][k][3]=(dpt[n-1][k][3]+dpt[n-1][k][2]+dpt[n-1][k][1]+dpt[n-1][k][0])*25-dpt[n][k][1]-dpt[n][k][2]//has minus better to use next formula
+            =(((dpt[n-1][k][3]+dpt[n-1][k][2])*25)+((dpt[n-1][k][0]+dpt[n-1][k][1])*24))
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QUESTION 2,3 and 4 -> EDIT DISTANCE AND LCA BASED - slight modification in each gives the answer to the next one
+---------------------------------------------------------------------------------------------------------------------------
