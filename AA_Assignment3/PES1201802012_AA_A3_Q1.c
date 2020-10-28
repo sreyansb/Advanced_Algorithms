@@ -2,14 +2,23 @@
 
 int mod=1000000007;
 
+/*
+dp[n][k][0]=(dpt[n-1][k-1][2]+(dpt[n-1][k][0]+dpt[n-1][k][1]+dpt[n-1][k][3]));
+dpt[n][k][1]=dpt[n-1][k][0];
+dpt[n][k][2]=dpt[n-1][k][1];
+dpt[n][k][3]=(dpt[n-1][k][3]+dpt[n-1][k][2]+dpt[n-1][k][1]+dpt[n-1][k][0])*25-dpt[n][k][1]-dpt[n][k][2];//has minus better to use next formula
+            =(((dpt[n-1][k][3]+dpt[n-1][k][2])*25)+((dpt[n-1][k][0]+dpt[n-1][k][1])*24));
+*/
+
 int main()
 {
     long long int dpt[201][67][4];
+
+    //base cases
     for(int row=0;row<201;++row)
         for(int k=0;k<67;++k)
             for(int clue=0;clue<4;++clue)
                 dpt[row][k][clue]=0;
-    //base cases
     dpt[1][0][0]=1;dpt[1][0][3]=25;
 
     //filling the dp table
@@ -21,7 +30,7 @@ int main()
             dpt[n][0][3]=((((dpt[n-1][0][3]+dpt[n-1][0][2])%mod)*25)%mod+(((dpt[n-1][0][0]+dpt[n-1][0][1])%mod)*24)%mod)%mod;
             for(int k=1;3*k+1<=n;++k)
             {
-                dpt[n][k][0]=(dpt[n-1][k-1][2]%mod+(dpt[n-1][k][0]+dpt[n-1][k][1]+dpt[n-1][k][3])%mod)%mod;
+                dpt[n][k][0]=(dpt[n-1][k-1][2]+(dpt[n-1][k][0]+dpt[n-1][k][1]+dpt[n-1][k][3])%mod)%mod;
                 dpt[n][k][1]=dpt[n-1][k][0];
                 dpt[n][k][2]=dpt[n-1][k][1];
                 dpt[n][k][3]=((((dpt[n-1][k][3]+dpt[n-1][k][2])%mod)*25)%mod+(((dpt[n-1][k][0]+dpt[n-1][k][1])%mod)*24)%mod)%mod;

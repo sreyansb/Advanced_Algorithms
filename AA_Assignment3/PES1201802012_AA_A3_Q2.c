@@ -52,7 +52,7 @@ int main()
             }
         }
         printf("%d\n",(m+n-2*lpstable[m*(n+1)+n]+mod)%mod);
-	free(lpstable);
+	    free(lpstable);
         free(sm);
         free(sn);
     }
