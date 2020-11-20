@@ -3,7 +3,7 @@
 #include<math.h>
 
 #define PI 3.1415926535
-typedef unsigned long long int uli;
+typedef long long int uli;
 //%llu
 
 typedef struct complex
@@ -23,7 +23,7 @@ int fft(int n,complex* A,int negative)
     if (n==1)
         return 0;
     complex* aodd=malloc(sizeof(complex)*n/2);
-    complex* aeven=malloc(sizeof(complex)*n/2);
+    complex* aeven=malloc(sizeof(complex)*(n+1)/2);//for odd n->there are odd number of elements in aeven
     for(int i=0;2*i<n;++i)
     {
         aeven[i]=A[2*i];
@@ -66,6 +66,7 @@ int main()
     scanf("%d",&n);
     complex* A = malloc(sizeof(complex)*(2*n));
     complex* B = malloc(sizeof(complex)*(2*n));
+    //printf("DONE\n");
     for(int i=0;i<n;++i)
     {
         scanf("%lf",&(A[i].real));
@@ -92,12 +93,12 @@ int main()
         A[i]=k;
     }
     fft(2*n,A,1);
-    int co;
+    uli co;
     //arrprint(2*n,A);
     for(int i=0;i<2*n;++i)
     {
         co=A[i].real-floor((A[i].real))>ceil(A[i].real)-A[i].real?ceil(A[i].real):floor(A[i].real);
-        printf("%d ",co);
+        printf("%lld ",co);
     }
     printf("\n");    
     return 0;

@@ -3,7 +3,7 @@
 
 int mod=1000000007;
 
-int gcd(int a,int b,int* x,int* y)
+int gcd(long long int a,int b,int* x,int* y)
 {
     if (!a)
     {
@@ -16,13 +16,12 @@ int gcd(int a,int b,int* x,int* y)
     return calcgcd;
 }
 
-int inverse(int a,int m)
+int inverse(long long int a,int m)
 {
     int x,y;
     int g=gcd(a,m,&x,&y);
     return (x%m+m)%m;
 }
-
 
 int main()
 {
@@ -45,7 +44,7 @@ int main()
     long long int sol=0;
     for(int i=0;i<n;++i)
     {
-        sol=sol+(remainders[i]*pi[i]*y[i]);
+        sol=(sol+(remainders[i]*pi[i]*y[i])%totprod)%totprod;
     }
     printf("%lld\n",(sol%totprod)%mod);
 }
